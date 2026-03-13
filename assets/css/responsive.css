@@ -3,7 +3,7 @@
 /* Tablet (768px and below) */
 @media (max-width: 768px) {
   body {
-    padding-top: 52px;
+    padding-top: 76px;
   }
     .pdf-preview-container {
         border-radius: 8px;
@@ -61,7 +61,7 @@
 
   .nav-menu {
     position: fixed;
-    top: 52px;
+    top: 76px;
     left: 0;
     right: 0;
     background: #fff;
@@ -483,7 +483,7 @@
 /* Mobile (480px and below) */
 @media (max-width: 480px) {
   body {
-    padding-top: 50px;
+    padding-top: 62px;
   }
 
   .logo img {
@@ -495,7 +495,7 @@
   }
 
   .nav-menu {
-    top: 50px;
+    top: 62px;
   }
 
   /* Hero Section */

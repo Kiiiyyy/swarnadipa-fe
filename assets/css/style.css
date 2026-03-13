@@ -2,7 +2,7 @@
 
 /* Force hamburger mode when zoomed on desktop */
 body.force-hamburger {
-  padding-top: 52px;
+  padding-top: 76px;
 }
 
 body.force-hamburger .navbar-wrapper {
@@ -54,7 +54,7 @@ body.force-hamburger .menu-toggle span {
 
 body.force-hamburger .nav-menu {
   position: fixed;
-  top: 52px;
+  top: 76px;
   left: 0;
   right: 0;
   background: #fff;
