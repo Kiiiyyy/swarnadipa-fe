@@ -1,0 +1,285 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Site Map - Swarnadipa" />
+    <title>Site Map - Swarnadipa</title>
+
+    <!-- Google Fonts - Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+
+    <style>
+      .sitemap-content {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .sitemap-section {
+        background: var(--bg-light);
+        padding: 30px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .sitemap-section h3 {
+        margin-bottom: 20px;
+        color: var(--text-dark);
+      }
+
+      .sitemap-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .sitemap-links li a {
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary-color);
+        font-weight: 600;
+        padding: 8px 0;
+        transition: var(--transition);
+      }
+
+      .sitemap-links li a:hover {
+        color: var(--accent-color);
+        text-decoration: underline;
+      }
+
+      .sitemap-links li a::before {
+        content: "→";
+        margin-right: 10px;
+      }
+
+      .info-box {
+        background: #fff;
+        border: 2px dashed var(--primary-color);
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 8px;
+      }
+
+      .info-box h4 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      .info-box p {
+        margin: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-wrapper">
+        <!-- Logo Left -->
+        <div class="logo">
+          <img
+            src="assets/images/logo.svg"
+            alt="Swarnadipa Logo"
+            class="logo-img"
+          />
+        </div>
+
+        <!-- Menu Center -->
+        <button class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="pages/company.html">COMPANY</a></li>
+          <li><a href="pages/solution.html">SOLUTION</a></li>
+          <li><a href="pages/product.html">PRODUCT & DATASHEET</a></li>
+          <li><a href="pages/references.html">PROJECT REFERENCES</a></li>
+        </ul>
+
+        <!-- Where to Buy Right -->
+        <div class="where-to-buy">
+          <a href="pages/where-to-buy.html">Where to buy</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Site Map</h1>
+        <p>Navigasi lengkap website Swarnadipa</p>
+      </div>
+    </section>
+
+    <section class="page-content">
+      <div class="sitemap-content">
+        <div class="info-box">
+          <h4>📌 Informasi Penting</h4>
+          <p>
+            ✅ Navbar responsif - Desktop: Logo kiri, Menu tengah, Where to buy
+            kanan
+          </p>
+          <p>✅ Mobile: Logo kiri, Hamburger menu kanan</p>
+          <p>✅ Semua pages memiliki navigasi yang konsisten</p>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>🏠 Home</h3>
+          <ul class="sitemap-links">
+            <li><a href="index.html">HOME - Halaman Utama</a></li>
+            <li style="color: var(--text-light); font-size: 13px">
+              → Hero Section, Services, About, Contact Info
+            </li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>🏢 Company</h3>
+          <ul class="sitemap-links">
+            <li><a href="pages/company.html">COMPANY - About Us</a></li>
+            <li style="color: var(--text-light); font-size: 13px">
+              → Visi & Misi, Nilai-nilai Company
+            </li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>💡 Solution</h3>
+          <ul class="sitemap-links">
+            <li>
+              <a href="pages/solution.html">SOLUTION - Solutions & Services</a>
+            </li>
+            <li style="color: var(--text-light); font-size: 13px">
+              → Pengembangan Web, Mobile Apps, Konsultasi IT, Keamanan Data,
+              Analytics, Support 24/7
+            </li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>📦 Product & Datasheet</h3>
+          <ul class="sitemap-links">
+            <li>
+              <a href="pages/product.html">PRODUCT & DATASHEET - Our Products</a>
+            </li>
+            <li style="color: var(--text-light); font-size: 13px">
+              → Enterprise Solution, SME Package, Cloud Services, Mobile App
+              Platform
+            </li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>🎯 Project References</h3>
+          <ul class="sitemap-links">
+            <li>
+              <a href="pages/references.html">PROJECT REFERENCES - Portfolio</a>
+            </li>
+            <li style="color: var(--text-light); font-size: 13px">
+              → E-Commerce Platform, Financial System, Healthcare App,
+              Logistics, HR Portal, E-Learning
+            </li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>🛒 Where to Buy</h3>
+          <ul class="sitemap-links">
+            <li>
+              <a href="pages/where-to-buy.html"
+                >WHERE TO BUY - Contact Us</a
+              >
+            </li>
+            <li style="color: var(--text-light); font-size: 13px">
+              → Info Contact, Form Contact Lengkap, Alamat, Telepon, Email
+            </li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h4>🚀 Quick Links</h4>
+          <p>
+            <a
+              href="REVISI_GUIDE.md"
+              style="color: var(--primary-color); font-weight: 600"
+              >📖 Baca Dokumentasi Revisi</a
+            >
+            |
+            <a
+              href="LOGO_SETUP.md"
+              style="color: var(--primary-color); font-weight: 600"
+              >🖼️ Setup Logo Anda</a
+            >
+            |
+            <a
+              href="README.md"
+              style="color: var(--primary-color); font-weight: 600"
+              >📚 Dokumentasi Umum</a
+            >
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h4>✨ Features</h4>
+          <ul style="margin-left: 20px">
+            <li>✅ Font Manrope di semua navbar dan heading</li>
+            <li>✅ Navbar fully responsive (desktop & mobile)</li>
+            <li>✅ Menu items dengan uppercase letters</li>
+            <li>✅ "Where to buy" dengan box styling</li>
+            <li>✅ Hamburger menu untuk mobile</li>
+            <li>✅ Smooth scroll dan active link detection</li>
+            <li>✅ Optimal performance - lightweight HTML/CSS/JS</li>
+            <li>✅ SEO friendly structure</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>Swarnadipa</h4>
+            <p>Trusted Technology Solutions for Modern Business Anda.</p>
+          </div>
+          <div class="footer-section">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="pages/solution.html">Pengembangan Web</a></li>
+              <li><a href="pages/solution.html">Aplikasi Mobile</a></li>
+              <li><a href="pages/solution.html">Konsultasi IT</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="pages/company.html">About Us</a></li>
+              <li><a href="pages/where-to-buy.html">Contact</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Swarnadipa. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

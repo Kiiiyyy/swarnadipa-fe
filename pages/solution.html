@@ -1,0 +1,189 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Solutions from Swarnadipa" />
+    <title>Solution - Swarnadipa</title>
+
+    <!-- Google Fonts - Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+  </head>
+  <body>
+
+    <section class="solution-section">
+      <div class="container solution-container-wide">
+        <div class="solution-section-header">
+          <h2>Our Solutions</h2>
+          <p>
+            We provide comprehensive technology solutions tailored for various
+            industries and sectors, helping businesses build secure, efficient,
+            and future-ready environments.
+          </p>
+        </div>
+        <div class="solutions-grid">
+          <div class="solution-card">
+            <div class="solution-image">
+              <img
+                src="../assets/images/airport.png"
+                alt="Airport & Aviation Solutions"
+              />
+            </div>
+            <h3>Airport & Aviation Solutions</h3>
+            <p>
+              An airport is an overflowing environment with a lot of crowds.
+              Safety is the issue regarding airport surveillance systems, from
+              the baggage hall to the check-in desks, to the cars and taxis
+              arriving in front and the plane’s refuelling. Several activities
+              are taking place simultaneously, all of which require oversight.
+              Creating a secure, appealing experience for passengers, airlines,
+              retailers, and investors requires transforming a whirlwind of
+              activity.
+            </p>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-image">
+              <img
+                src="../assets/images/healthcare.png"
+                alt="Healthcare Solutions"
+              />
+            </div>
+            <h3>Healthcare Solutions</h3>
+            <p>
+              Healthcare facilities like Hospitals, special health centres and
+              the like often has specialized protection and security
+              requirements. Importantly, they require security along with
+              hygienic and safety needs. Hospitals are the meeting ground for
+              the crowd requiring healing, care and recovery. Maintaining a
+              higher volume of people and smooth functioning is a challenge
+              hospitals face.
+            </p>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-image">
+              <img
+                src="../assets/images/education.png"
+                alt="Education Solutions"
+              />
+            </div>
+            <h3>Education Solutions</h3>
+            <p>
+              Norden contributes to the safety of the educational environment,
+              allowing educators to teach and students to study in a secure
+              atmosphere. Norden provides a comprehensive security solution that
+              ensures the safety of students, faculty, property, classrooms, and
+              dorm rooms. The surveillance system Norden ensures the prevention
+              of unauthorized access on campuses at all times.
+            </p>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-image">
+              <img
+                src="../assets/images/datacentre.png"
+                alt="Data Centre Solutions"
+              />
+            </div>
+            <h3>Data Centre Solutions</h3>
+            <p>
+              Structured cabling is an essential component of the data centre,
+              helping organizations and businesses keep their wiring
+              infrastructure organized and flexible. A structured cabling system
+              employs a series of patch panels, trunk cables, and pre-terminated
+              solutions to connect hardware ports to a patch panel at the top of
+              the rack. The structured cabling system comprises six key
+              elements: horizontal cabling, backbone cabling, a work area, a
+              telecommunications room, an equipment room, and an entrance
+              facility
+            </p>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-image">
+              <img
+                src="../assets/images/banking.png"
+                alt="Banking & Finance Solutions"
+              />
+            </div>
+            <h3>Banking & Finance Solutions</h3>
+            <p>
+              Norden has its focus adhered to the aspirations and needs of
+              customers. While keeping them in mind, Norden brings high-
+              performance surveillance products to the market, which is in
+              demand. The wide range of Norden surveillance solutions complies
+              with the policies of NDAA compliance. Our products stand out as a
+              promising and complete solution to all the surveillance challenges
+              globally. Norden strive for excellence in all aspects of our
+              business by integrating sustainable development and innovation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/navbar-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/scroll-reveal.js"></script>
+    <script>
+      // Typing animation for solution header (mirrors company page behaviour)
+      const solutionTitle = document.querySelector(
+        ".solution-section-header h2",
+      );
+      const solutionDesc = document.querySelector(".solution-section-header p");
+
+      if (solutionTitle) {
+        const text = solutionTitle.textContent;
+        solutionTitle.textContent = "";
+        let index = 0;
+
+        const typeText = () => {
+          if (index < text.length) {
+            solutionTitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeText, 55);
+          }
+        };
+
+        if (solutionDesc) {
+          solutionDesc.style.opacity = "0";
+          solutionDesc.style.transform = "translateY(14px)";
+          solutionDesc.style.transition =
+            "opacity 0.8s ease, transform 0.8s ease";
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && index === 0) {
+              typeText();
+              if (solutionDesc) {
+                setTimeout(
+                  () => {
+                    solutionDesc.style.opacity = "1";
+                    solutionDesc.style.transform = "translateY(0)";
+                  },
+                  text.length * 55 + 150,
+                );
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+
+        observer.observe(solutionTitle);
+      }
+    </script>
+  </body>
+</html>

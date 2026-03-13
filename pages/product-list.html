@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - Swarnadipa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+  </head>
+  <body>
+
+    <section class="product-list-section">
+      <div class="container">
+        <div class="product-search-box">
+          <span class="product-search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="text"
+            id="productSearchInput"
+            placeholder="Search products by name or SKU..."
+            class="product-search-input"
+          />
+        </div>
+
+        <div class="products-list" id="productsList">
+            <p>Loading products...</p>
+        </div>
+      </div>
+    </section>
+    <script src="../assets/js/navbar-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/scroll-reveal.js"></script>
+    <script src="../assets/js/product-list.js"></script>
+  </body>
+</html>

@@ -1,0 +1,742 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Backend Project Brief</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+
+      h2 {
+        margin-top: 30px;
+        color: #34495e;
+      }
+
+      pre {
+        background: #f4f4f4;
+        padding: 15px;
+        border-radius: 5px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Backend Project Brief - PT Swarnadipa Rampai Teknologi</h1>
+
+    <div class="section">
+      <h2>1. Project Overview</h2>
+
+      <p>
+        Backend system merupakan REST API yang melayani website frontend dan
+        admin panel. Sistem mengelola data produk, inventory/stok, brand,
+        kategori produk. Backend dirancang untuk scalability dan keamanan dengan
+        autentikasi admin yang ketat.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>2. Tujuan Sistem</h2>
+
+      <ul>
+        <li>
+          Menyediakan REST API untuk pengambilan data produk, kategori, dan
+          brand.
+        </li>
+        <li>Menyediakan API dinamis untuk data inventory/stok real-time.</li>
+        <li>Menyediakan sistem login & autentikasi administrator.</li>
+        <li>Menyediakan admin panel untuk CRUD produk dan inventory.</li>
+        <li>Menyimpan semua data dalam database terstruktur.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3. Teknologi Backend</h2>
+
+      <ul>
+        <li>Framework: <strong>Laravel 10/11</strong> (PHP)</li>
+        <li>Database: MySQL 8.0+</li>
+        <li>Authentication: Laravel Sanctum (API Tokens)</li>
+        <li>Validation: Laravel Validator</li>
+        <li>File Storage: Local disk atau S3</li>
+        <li>CORS: Laravel CORS middleware</li>
+        <li>API Documentation: Postman/OpenAPI Spec</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>3.1. Struktur Folder Laravel</h2>
+
+      <pre>
+laravel-backend/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Api/
+│   │   │   │   ├── BrandController.php
+│   │   │   │   ├── CategoryController.php
+│   │   │   │   ├── ProductController.php
+│   │   │   │   ├── StockController.php
+│   │   │   │   └── AuthController.php
+│   │   │   └── Admin/
+│   │   │       ├── AdminAuthController.php
+│   │   │       ├── AdminProductController.php
+│   │   │       └── AdminStockController.php
+│   │   └── Middleware/
+│   │       ├── AdminMiddleware.php
+│   │       └── CorsMiddleware.php
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Brand.php
+│   │   ├── Category.php
+│   │   ├── Product.php
+│   │   └── Inventory.php
+│   └── Resources/
+│       ├── BrandResource.php
+│       ├── ProductResource.php
+│       └── InventoryResource.php
+├── database/
+│   ├── migrations/
+│   │   ├── [timestamp]_create_users_table.php
+│   │   ├── [timestamp]_create_brands_table.php
+│   │   ├── [timestamp]_create_categories_table.php
+│   │   ├── [timestamp]_create_products_table.php
+│   │   └── [timestamp]_create_inventory_table.php
+│   └── seeders/
+│       ├── DatabaseSeeder.php
+│       ├── BrandSeeder.php
+│       ├── CategorySeeder.php
+│       └── ProductSeeder.php
+├── routes/
+│   ├── api.php
+│   ├── web.php
+│   └── channels.php
+├── resources/
+│   └── views/ (optional, untuk admin if web-based)
+├── storage/
+│   └── app/
+│       ├── uploads/images/
+│       └── uploads/documents/
+├── tests/ (optional)
+└── .env (environment variables)
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>3.2. Setup & Configuration</h2>
+
+      <pre>
+# Install dependencies
+composer install
+
+# Environment setup
+cp .env.example .env
+php artisan key:generate
+
+# Database setup
+php artisan migrate
+php artisan db:seed
+
+# API documentation
+php artisan route:list
+
+# Run development server
+php artisan serve --port=8000
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>3.3. Key Laravel Files Configuration</h2>
+
+      <h3>.env Variables:</h3>
+      <pre>
+APP_NAME="Swarnadipa API"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://api.swarnadipa.com
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=swarnadipa_db
+DB_USERNAME=root
+DB_PASSWORD=password
+
+SANCTUM_STATEFUL_DOMAINS=swarnadipa.com
+
+APP_CORS_ALLOWED_ORIGINS=https://swarnadipa.com,https://www.swarnadipa.com
+</pre
+      >
+
+      <h3>config/cors.php:</h3>
+      <pre>
+'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+'allowed_origins' => [env('APP_CORS_ALLOWED_ORIGINS')],
+'allowed_headers' => ['Content-Type', 'Authorization'],
+'exposed_headers' => ['X-Total-Count'],
+'max_age' => 3600,
+'supports_credentials' => true,
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>3.4. routes/api.php Configuration</h2>
+
+      <pre>
+&lt;?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\StockController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminStockController;
+
+// Public API Routes (no auth)
+Route::prefix('v1')->group(function () {
+    Route::get('/brands', [BrandController::class, 'index']);
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/{id}', [ProductController::class, 'show']);
+    Route::get('/stock', [StockController::class, 'index']);
+});
+
+// Admin API Routes (with auth)
+Route::prefix('v1/admin')->group(function () {
+    Route::post('/login', [AdminAuthController::class, 'login']);
+    
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [AdminAuthController::class, 'logout']);
+        Route::get('/products', [AdminProductController::class, 'index']);
+        Route::post('/products', [AdminProductController::class, 'store']);
+        Route::put('/products/{id}', [AdminProductController::class, 'update']);
+        Route::delete('/products/{id}', [AdminProductController::class, 'destroy']);
+        Route::get('/stock', [AdminStockController::class, 'index']);
+        Route::put('/stock/{product_id}', [AdminStockController::class, 'update']);
+    });
+});
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>3.5. Controller Example (Product Controller)</h2>
+
+      <pre>
+&lt;?php
+namespace App\Http\Controllers\Api;
+
+use App\Models\Product;
+use App\Http\Resources\ProductResource;
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    public function index(Request $request)
+    {
+        $query = Product::with(['brand', 'category', 'inventory']);
+        
+        if ($request->brand_id) {
+            $query->where('brand_id', $request->brand_id);
+        }
+        if ($request->category_id) {
+            $query->where('category_id', $request->category_id);
+        }
+        
+        $products = $query->paginate(20);
+        
+        return response()->json([
+            'success' => true,
+            'data' => ProductResource::collection($products),
+            'pagination' => [
+                'total' => $products->total(),
+                'per_page' => $products->perPage(),
+                'current_page' => $products->currentPage(),
+                'last_page' => $products->lastPage(),
+            ]
+        ]);
+    }
+    
+    public function show($id)
+    {
+        try {
+            $product = Product::with(['brand', 'category', 'inventory'])->findOrFail($id);
+            return response()->json([
+                'success' => true,
+                'data' => new ProductResource($product)
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Product not found'
+            ], 404);
+        }
+    }
+}
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>4. Brand & Kategori Data</h2>
+
+      <h3>Brands (Master Data):</h3>
+      <pre>
+1. Norden
+2. Forteq
+3. Golden Pots
+</pre
+      >
+
+      <h3>Kategori Produk (Master Data):</h3>
+      <pre>
+1. Surveillance System
+   - Global Shutter Camera
+   - Body Worn Camera
+   - Video Recorder
+   - PTZ Dome Camera
+
+2. Cabling System
+   - ADSS Fiber Optic Cable
+   - High Density Patch Panel
+   - 1U Loaded Panel
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>5. REST API Endpoints</h2>
+
+      <h3>PUBLIC ENDPOINTS (No Authentication Required):</h3>
+
+      <pre>
+# Get all brands
+GET /api/v1/brands
+Response: { success: true, data: [...] }
+
+# Get all product categories
+GET /api/v1/categories
+Response: { success: true, data: [...] }
+
+# Get products by brand & category with filter
+GET /api/v1/products?brand_id=1&category_id=1
+Response: { success: true, data: [products_array] }
+
+# Get single product detail
+GET /api/v1/products/{id}
+Response: { success: true, data: {...} }
+
+# Get real-time inventory/stock data
+GET /api/v1/stock
+Response: { success: true, data: [inventory_array] }
+
+</pre
+      >
+
+      <h3>ADMIN ENDPOINTS (Requires Authentication):</h3>
+
+      <pre>
+# Admin login
+POST /api/v1/admin/login
+Body: { email, password }
+Response: { success: true, token: "...", admin: {...} }
+
+# Admin logout
+POST /api/v1/admin/logout
+Headers: { Authorization: "Bearer {token}" }
+
+# Get all products (admin)
+GET /api/v1/admin/products
+Headers: { Authorization: "Bearer {token}" }
+
+# Create new product
+POST /api/v1/admin/products
+Headers: { Authorization: "Bearer {token}" }
+Body: { name, sku, brand_id, category_id, description, image, price }
+
+# Update product
+PUT /api/v1/admin/products/{id}
+Headers: { Authorization: "Bearer {token}" }
+
+# Delete product
+DELETE /api/v1/admin/products/{id}
+Headers: { Authorization: "Bearer {token}" }
+
+# Update stock/inventory
+PUT /api/v1/admin/stock/{product_id}
+Headers: { Authorization: "Bearer {token}" }
+Body: { stock_status, quantity, updated_date }
+
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>6. Database Structure</h2>
+
+      <h3>Table: admins</h3>
+      <pre>
+id (INT, PK)
+email (VARCHAR, UNIQUE)
+password_hash (VARCHAR)
+name (VARCHAR)
+status (ENUM: active, inactive)
+created_at (TIMESTAMP)
+updated_at (TIMESTAMP)
+</pre
+      >
+
+      <h3>Table: brands</h3>
+      <pre>
+id (INT, PK)
+name (VARCHAR, UNIQUE)
+description (TEXT, nullable)
+logo_url (VARCHAR, nullable)
+created_at (TIMESTAMP)
+updated_at (TIMESTAMP)
+</pre
+      >
+
+      <h3>Table: categories</h3>
+      <pre>
+id (INT, PK)
+name (VARCHAR, UNIQUE)
+slug (VARCHAR, UNIQUE)
+description (TEXT, nullable)
+created_at (TIMESTAMP)
+updated_at (TIMESTAMP)
+</pre
+      >
+
+      <h3>Table: products</h3>
+      <pre>
+id (INT, PK)
+name (VARCHAR)
+sku (VARCHAR, UNIQUE)
+brand_id (INT, FK -> brands.id)
+category_id (INT, FK -> categories.id)
+description (TEXT)
+price (DECIMAL, nullable)
+image_url (VARCHAR, nullable)
+datasheet_url (VARCHAR, nullable)
+is_active (BOOLEAN, DEFAULT true)
+created_at (TIMESTAMP)
+updated_at (TIMESTAMP)
+</pre
+      >
+
+      <h3>Table: inventory</h3>
+      <pre>
+id (INT, PK)
+product_id (INT, FK -> products.id, UNIQUE)
+quantity (INT, DEFAULT 0)
+stock_status (ENUM: in_stock, low_stock, out_of_stock)
+min_quantity (INT, DEFAULT 5)
+last_updated (TIMESTAMP)
+updated_by (INT, FK -> admins.id, nullable)
+created_at (TIMESTAMP)
+updated_at (TIMESTAMP)
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>6.1. Laravel Migration Example (Products Table)</h2>
+
+      <pre>
+&lt;?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('sku')->unique();
+            $table->foreignId('brand_id')->constrained('brands');
+            $table->foreignId('category_id')->constrained('categories');
+            $table->text('description')->nullable();
+            $table->decimal('price', 15, 2)->nullable();
+            $table->string('image_url')->nullable();
+            $table->string('datasheet_url')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
+            
+            $table->index('brand_id');
+            $table->index('category_id');
+            $table->index('is_active');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('products');
+    }
+};
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>6.2. Eloquent Model Example (Product Model)</h2>
+
+      <pre>
+&lt;?php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $fillable = [
+        'name', 'sku', 'brand_id', 'category_id',
+        'description', 'price', 'image_url', 'datasheet_url', 'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'price' => 'decimal:2',
+    ];
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function inventory()
+    {
+        return $this->hasOne(Inventory::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+}
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>7. Response Format Standard</h2>
+
+      <h3>Success Response:</h3>
+      <pre>
+{
+  "success": true,
+  "message": "Operation successful",
+  "data": { ... } or [ ... ],
+  "timestamp": "2026-03-08T10:30:00Z"
+}
+</pre
+      >
+
+      <h3>Error Response:</h3>
+      <pre>
+{
+  "success": false,
+  "message": "Error description",
+  "error_code": "INVALID_INPUT",
+  "timestamp": "2026-03-08T10:30:00Z"
+}
+</pre
+      >
+
+      <h3>Paginated Response (for listing endpoints):</h3>
+      <pre>
+{
+  "success": true,
+  "data": [...],
+  "pagination": {
+    "total": 100,
+    "per_page": 10,
+    "current_page": 1,
+    "last_page": 10
+  }
+}
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>8. Stock API Response Example</h2>
+
+      <pre>
+GET /api/v1/stock
+
+Response:
+{
+  "success": true,
+  "data": [
+    {
+      "no": 1,
+      "brand": "Norden",
+      "product_name": "Global Shutter Camera",
+      "sku": "ENC-HBUAF-00R-72",
+      "category": "Surveillance",
+      "stock_status": "in_stock",
+      "quantity": 45,
+      "updated_date": "2026-03-08"
+    },
+    {
+      "no": 2,
+      "brand": "Norden",
+      "product_name": "Body Worn Camera",
+      "sku": "ENC-HBCZF-07R-83",
+      "category": "Surveillance",
+      "stock_status": "low_stock",
+      "quantity": 3,
+      "updated_date": "2026-03-08"
+    }
+  ]
+}
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>9. Admin Panel Features</h2>
+
+      <ul>
+        <li>Dashboard dengan statistik (total produk, stok kosong).</li>
+        <li>Product Management: CRUD, edit bulk, filter by brand/category.</li>
+        <li>Inventory Management: Update stok, lihat history perubahan.</li>
+        <li>User Management: Create/edit/delete admin accounts.</li>
+        <li>Reports: Export data produk dan inventory ke CSV/PDF.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>10. Security Implementation</h2>
+
+      <ul>
+        <li>Password hashing menggunakan bcrypt (Laravel Hash facade).</li>
+        <li>Laravel Sanctum untuk API token-based authentication.</li>
+        <li>Input validation menggunakan Laravel Validator rules.</li>
+        <li>
+          Eloquent ORM dengan parameterized queries (prevent SQL injection).
+        </li>
+        <li>CORS middleware untuk allow frontend domain saja.</li>
+        <li>
+          Rate limiting middleware (max 5 login attempts/5 menit) via
+          RateLimiter.
+        </li>
+        <li>Authorization gates & policies untuk akses kontrol.</li>
+        <li>API versioning (/api/v1/) untuk backward compatibility.</li>
+        <li>Action logging via Laravel Events untuk audit trail.</li>
+        <li>HTTPS only (.env: APP_URL harus https).</li>
+        <li>Environment variables tidak boleh di-expose (gunakan .env).</li>
+        <li>
+          Update Laravel & dependencies secara berkala untuk security patches.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>10.1. Laravel Middleware Setup</h2>
+
+      <pre>
+// app/Http/Middleware/EnsureAdminTokenIsValid.php
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class EnsureAdminTokenIsValid
+{
+    public function handle(Request $request, Closure $next)
+    {
+        $user = $request->user();
+        
+        if (!$user || !$user->tokens()->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+        
+        return $next($request);
+    }
+}
+
+// Register in app/Http/Kernel.php
+protected $routeMiddleware = [
+    'admin.auth' => \App\Http\Middleware\EnsureAdminTokenIsValid::class,
+];
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>10.2. Rate Limiting Configuration</h2>
+
+      <pre>
+// app/Providers/RouteServiceProvider.php
+RateLimiter::for('login', function (Request $request) {
+    return Limit::perMinute(5)->by($request->ip());
+});
+
+// In routes/api.php
+Route::post('/admin/login', [AdminAuthController::class, 'login'])
+    ->middleware('throttle:login');
+</pre
+      >
+    </div>
+
+    <div class="section">
+      <h2>11. File Upload Handling (Images & Datasheet)</h2>
+
+      <ul>
+        <li>Simpan image di /uploads/images/ dengan random filename.</li>
+        <li>Simpan datasheet PDF di /uploads/documents/.</li>
+        <li>Validate file type (whitelist: jpg, png, pdf).</li>
+        <li>Limit file size: max 5MB untuk image, 10MB untuk PDF.</li>
+        <li>Serve melalui CDN atau static server untuk performa optimal.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>12. Output Sistem</h2>
+
+      <ul>
+        <li>
+          REST API endpoints yang production-ready dengan proper error handling.
+        </li>
+        <li>Admin panel untuk manajemen produk, stok, dan Contact.</li>
+        <li>Database schema yang normalized dan scalable.</li>
+        <li>Security layer untuk proteksi data sensitif.</li>
+        <li>Documentation lengkap untuk API integration.</li>
+      </ul>
+    </div>
+  </body>
+</html>
+```
+

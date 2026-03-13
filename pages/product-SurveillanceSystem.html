@@ -1,0 +1,206 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Copper Products Swarnadipa" />
+    <title>Copper - Swarnadipa</title>
+
+    <!-- Google Fonts - Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-wrapper">
+        <!-- Logo Left -->
+        <div class="logo">
+          <a href="../index.html">
+            <img
+              src="../assets/images/logo.png"
+              alt="Swarnadipa Logo"
+              class="logo-img"
+            />
+          </a>
+        </div>
+
+        <!-- Menu Center -->
+        <button class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">HOME</a></li>
+          <li><a href="company.html">COMPANY</a></li>
+          <li><a href="solution.html">SOLUTION</a></li>
+          <li class="nav-dropdown">
+            <a href="product.html">PRODUCT & DATASHEET</a>
+            <ul class="dropdown-menu">
+              <li><a href="product-norden.html">Norden</a></li>
+              <li><a href="product-forteq.html">Forteq</a></li>
+              <li><a href="product-goldenpots.html">Golden Pots</a></li>
+            </ul>
+          </li>
+          <li><a href="references.html">PORTFOLIO</a></li>
+          <li><a href="our-stock.html">OUR STOCK</a></li>
+        </ul>
+
+        <!-- Where to Buy Right -->
+        <div class="where-to-buy">
+          <a href="where-to-buy.html">Contact Us</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="product-list-section">
+      <div class="container">
+        <!-- Product Search -->
+        <div class="product-search-box">
+          <span class="product-search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="text"
+            id="productSearchInput"
+            placeholder="Search products by name or SKU..."
+            class="product-search-input"
+          />
+        </div>
+
+        <div class="products-list" id="productsList">
+          <div
+            class="product-item"
+            data-product-name="GLOBAL SHUTTER CAMERA"
+            data-sku="ENC-HBUAF-00R-72"
+          >
+            <a
+              class="product-item-link"
+              href="product-GlobalShutterCamera.html"
+            >
+              <div class="product-item-image">
+                <img
+                  src="../assets/images/GlobalShutterCamera.png"
+                  alt="Global Shutter Camera"
+                />
+              </div>
+              <h3>GLOBAL SHUTTER CAMERA</h3>
+              <h5>ENC-HBUAF-00R-72</h5>
+            </a>
+            <a
+              href="../assets/pdf/surveillance/GLOBAL-SHUTTER-CAMERA-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+
+          <div
+            class="product-item"
+            data-product-name="64MP BODY WORN CAMERA"
+            data-sku="ENC-HBCZF-07R-83"
+          >
+            <div class="product-item-image">
+              <img
+                src="../assets/images/BodyWornCamera.png"
+                alt="Category 6 Cable"
+              />
+            </div>
+            <h3>64MP BODY WORN CAMERA</h3>
+            <h5>ENC-HBCZF-07R-83</h5>
+            <a
+              href="../assets/pdf/surveillance/64MP-BODY-WORN-CAMERA-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+
+          <div
+            class="product-item"
+            data-product-name="16CH EMBEDDED NETWORK VIDEO RECORDER"
+            data-sku="ENR-02016-N-SPK"
+          >
+            <div class="product-item-image">
+              <img
+                src="../assets/images/4KVideoRecorder.png"
+                alt="Patch Cord RJ45"
+              />
+            </div>
+            <h3>16CH EMBEDDED NETWORK VIDEO RECORDER</h3>
+            <h5>ENR-02016-N-SPK</h5>
+            <a
+              href="../assets/pdf/surveillance/16CH EMBEDDED NETWORK VIDEO RECORDER-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+
+          <div
+            class="product-item"
+            data-product-name="4MP PTZ DOME CAMERA"
+            data-sku="ENC-HHP7Z-300R-70"
+          >
+            <div class="product-item-image">
+              <img
+                src="../assets/images/4MPPTZDOMECAMERA.png"
+                alt="Keystone Jack"
+              />
+            </div>
+            <h3>4MP PTZ DOME CAMERA</h3>
+            <h5>ENC-HHP7Z-300R-70</h5>
+            <a
+              href="../assets/pdf/surveillance/4MP-PTZ-DOME-CAMERA-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+      // Product Search Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("productSearchInput");
+        const productsList = document.getElementById("productsList");
+        const productItems = productsList.querySelectorAll(".product-item");
+
+        if (searchInput) {
+          searchInput.addEventListener("input", function (e) {
+            const searchQuery = e.target.value.toLowerCase().trim();
+
+            productItems.forEach((item) => {
+              const productName = (
+                item.dataset.productName || ""
+              ).toLowerCase();
+              const sku = (item.dataset.sku || "").toLowerCase();
+
+              if (
+                productName.includes(searchQuery) ||
+                sku.includes(searchQuery)
+              ) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        }
+      });
+    </script>
+    <script src="../assets/js/scroll-reveal.js"></script>
+  </body>
+</html>

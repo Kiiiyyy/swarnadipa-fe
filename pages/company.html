@@ -1,0 +1,248 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="About Swarnadipa Company" />
+    <title>Company - Swarnadipa</title>
+
+    <!-- Google Fonts - Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+  </head>
+  <body>
+    <!-- Business Overview Section -->
+    <section class="company-section">
+      <div class="container company-container-wide">
+        <div class="company-grid company-grid-three">
+          <div class="company-main-media">
+            <img src="../assets/images/about.png" alt="Swarnadipa Office" />
+          </div>
+          <div class="company-content company-content-compact">
+            <h2>About Swarnadipa (SRT)</h2>
+            <p>
+              PT. Swarnadipa Rampai Technologi or commonly named as SRT, is part
+              of Sriwjaya Teknik Group, which has well-known from its debuted as
+              Velcro Fasteners distributor in Indonesia. The Company has just
+              established on June 2025 and currently have supplied to big
+              projects in Indonesia for passive network infrastructure & IP ELV
+              solutions. We run our daily business in project and retail market
+              and develop our IP&E online business for supplying electronic &
+              electrical components to the specific industries in Manufacturing,
+              Aviation Maintenance, Oil & Gas & Mining and Building Maintenance,
+              through our golden-pots.com website.
+            </p>
+            <p>
+              By maintaining a good name and through the principles of caution
+              and seriousness in building a brand. We have been trusted to
+              become Representative Agency for some global brands, and we
+              support them also to expand their market in Indonesia, by helping
+              them in Sales, Marketing, and Product Development. Including
+              prepared the facilities from warehouse, people and needful
+              resources.
+            </p>
+          </div>
+          <div class="company-brand-column">
+            <div class="company-brand-item">
+              <a href="product-norden.html">
+                <img src="../assets/images/norden.png" alt="Norden" />
+              </a>
+            </div>
+            <div class="company-brand-item">
+              <a href="product-forteq.html">
+                <img src="../assets/images/forteq.png" alt="Forteq" />
+              </a>
+            </div>
+            <div class="company-brand-item">
+              <a href="product-goldenpots.html">
+                <img src="../assets/images/goldenpots.png" alt="Golden Pots" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <br>
+    <!-- Contact Information Section -->
+    <section class="company-contact-section">
+      <div class="container">
+        <div class="company-contact-grid">
+          <div class="contact-info-item company-contact-block">
+            <h3>Our Office</h3>
+            <p>
+              Grand Boulevard, BSD Green Office Park, <br />
+              BSD City, Kabupaten Tangerang - Banten
+            </p>
+          </div>
+
+          <div class="contact-info-item company-contact-block">
+            <h3>Contact Us</h3>
+            <ul class="company-contact-list">
+              <li class="company-contact-list-item">
+                <span class="company-contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+                    />
+                  </svg>
+                </span>
+                <a href="mailto:sales@swarnadipa.com">sales@swarnadipa.com</a>
+              </li>
+              <li class="company-contact-list-item">
+                <span class="company-contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"
+                    />
+                  </svg>
+                </span>
+                <a href="tel:+6281319351200">+62 813-1935-1200</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section><br><br><br>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/navbar-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/scroll-reveal.js"></script>
+    <script>
+      // Typing animation for About Swarnadipa title
+      const companyTitle = document.querySelector(".company-content h2");
+      if (companyTitle) {
+        const text = companyTitle.textContent;
+        companyTitle.textContent = "";
+        let index = 0;
+
+        const typeText = () => {
+          if (index < text.length) {
+            companyTitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeText, 50);
+          }
+        };
+
+        // Trigger animation when element is in view
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && index === 0) {
+              typeText();
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+
+        observer.observe(companyTitle);
+      }
+
+      // Fade-in animation for paragraphs
+      const paragraphs = document.querySelectorAll(".company-content p");
+      paragraphs.forEach((p, idx) => {
+        p.style.opacity = "0";
+        p.style.animation = `fadeInUp 0.8s ease forwards ${0.3 + idx * 0.2}s`;
+      });
+
+      // Add fadeInUp animation to CSS
+      if (!document.querySelector("style[data-company-animations]")) {
+        const style = document.createElement("style");
+        style.setAttribute("data-company-animations", "true");
+        style.textContent = `
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .company-brand-item {
+            animation: slideInRight 0.8s ease forwards;
+            opacity: 0;
+          }
+
+          .company-brand-item:nth-child(1) {
+            animation-delay: 0.2s;
+          }
+
+          .company-brand-item:nth-child(2) {
+            animation-delay: 0.4s;
+          }
+
+          .company-brand-item:nth-child(3) {
+            animation-delay: 0.6s;
+          }
+
+          @keyframes slideInRight {
+            from {
+              opacity: 0;
+              transform: translateX(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .company-main-media {
+            animation: zoomIn 0.8s ease forwards;
+          }
+
+          @keyframes zoomIn {
+            from {
+              opacity: 0;
+              transform: scale(0.9);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          .contact-info-item {
+            animation: slideInUp 0.8s ease forwards;
+            opacity: 0;
+          }
+
+          .contact-info-item:nth-child(1) {
+            animation-delay: 0.2s;
+          }
+
+          .contact-info-item:nth-child(2) {
+            animation-delay: 0.4s;
+          }
+
+          .contact-info-item:nth-child(3) {
+            animation-delay: 0.6s;
+          }
+
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    </script>
+  </body>
+</html>

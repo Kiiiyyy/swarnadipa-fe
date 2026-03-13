@@ -1,0 +1,163 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Our Stock - Swarnadipa" />
+    <title>Our Stock - Swarnadipa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+  </head>
+  <body>
+  
+    <section class="stock-section">
+      <div class="container">
+        <!-- Stock Page Heading -->
+        <div class="stock-page-heading">
+          <h2>Our Stock Inventory</h2>
+          <p>Real-time product availability and stock status</p>
+        </div>
+
+        <!-- Filter and Search Section -->
+        <div
+          id="filterSection"
+          class="stock-filter-section"
+          style="display: none"
+        >
+          <div class="filter-search-container">
+            <div class="search-box">
+              <span class="stock-search-icon" aria-hidden="true">🔍</span>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by product name or SKU..."
+                class="search-input"
+              />
+            </div>
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-brand="all">
+                All Brands
+              </button>
+              <button class="filter-btn" data-brand="Norden">Norden</button>
+              <button class="filter-btn" data-brand="Forteq">Forteq</button>
+              <button class="filter-btn" data-brand="Golden Pots">
+                Golden Pots
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="stock-state loading-state">
+          <div class="spinner"></div>
+          <p>Loading inventory data...</p>
+        </div>
+
+        <!-- Table Container -->
+        <div id="tableContainer" class="stock-table-wrap" style="display: none">
+          <table class="stock-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Product Name</th>
+                <th>Brand</th>
+                <th>SKU</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Updated</th>
+                <th>Datasheet</th>
+              </tr>
+            </thead>
+            <tbody id="stockTableBody">
+              <!-- Data will be rendered here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div
+          id="emptyState"
+          class="stock-state empty-state"
+          style="display: none"
+        >
+          <div class="empty-icon">📦</div>
+          <h3>No Stock Data Available</h3>
+          <p>
+            There are currently no inventory records. Please check back later.
+          </p>
+        </div>
+
+        <!-- Error State -->
+        <div
+          id="errorState"
+          class="stock-state error-state"
+          style="display: none"
+        >
+          <div class="error-icon">⚠️</div>
+          <h3>Failed to Load Inventory</h3>
+          <p id="errorMessage">An error occurred while fetching stock data.</p>
+          <button id="retryButton" class="retry-btn">Refresh</button>
+        </div>
+      </div>
+    </section>
+    
+    <script src="../assets/js/navbar-loader.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/stock.js"></script>
+    <script src="../assets/js/scroll-reveal.js"></script>
+    <script>
+      // Typing animation for Our Stock heading (mirrors company/solution pages)
+      const stockTitle = document.querySelector(".stock-page-heading h2");
+      const stockDesc = document.querySelector(".stock-page-heading p");
+
+      if (stockTitle) {
+        const text = stockTitle.textContent;
+        stockTitle.textContent = "";
+        let index = 0;
+
+        const typeText = () => {
+          if (index < text.length) {
+            stockTitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeText, 55);
+          }
+        };
+
+        if (stockDesc) {
+          stockDesc.style.opacity = "0";
+          stockDesc.style.transform = "translateY(14px)";
+          stockDesc.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && index === 0) {
+              typeText();
+              if (stockDesc) {
+                setTimeout(
+                  () => {
+                    stockDesc.style.opacity = "1";
+                    stockDesc.style.transform = "translateY(0)";
+                  },
+                  text.length * 55 + 150,
+                );
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+
+        observer.observe(stockTitle);
+      }
+    </script>
+  </body>
+</html>

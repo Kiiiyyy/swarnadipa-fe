@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fiber Optic Products Swarnadipa" />
+    <title>Fiber Optic - Swarnadipa</title>
+
+    <!-- Google Fonts - Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-wrapper">
+        <!-- Logo Left -->
+        <div class="logo">
+          <a href="../index.html">
+            <img
+              src="../assets/images/logo.png"
+              alt="Swarnadipa Logo"
+              class="logo-img"
+            />
+          </a>
+        </div>
+
+        <!-- Menu Center -->
+        <button class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">HOME</a></li>
+          <li><a href="company.html">COMPANY</a></li>
+          <li><a href="solution.html">SOLUTION</a></li>
+          <li class="nav-dropdown">
+            <a href="product.html">PRODUCT & DATASHEET</a>
+            <ul class="dropdown-menu">
+              <li><a href="product-norden.html">Norden</a></li>
+              <li><a href="product-forteq.html">Forteq</a></li>
+              <li><a href="product-goldenpots.html">Golden Pots</a></li>
+            </ul>
+          </li>
+          <li><a href="references.html">PORTFOLIO</a></li>
+          <li><a href="our-stock.html">OUR STOCK</a></li>
+        </ul>
+
+        <!-- Where to Buy Right -->
+        <div class="where-to-buy">
+          <a href="where-to-buy.html">Contact Us</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="product-list-section">
+      <div class="container">
+        <!-- Product Search -->
+        <div class="product-search-box">
+          <span class="product-search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="text"
+            id="productSearchInput"
+            placeholder="Search products by name..."
+            class="product-search-input"
+          />
+        </div>
+
+        <div class="products-list" id="productsList">
+          <div
+            class="product-item"
+            data-product-name="ADSS MULTI-LOOSE TUBE FIBRE OPTIC CABLE"
+          >
+            <div class="product-item-image">
+              <img
+                src="../assets/images/ADSSMULTI-LOOSE.png"
+                alt="Forteq LC Adapter"
+              />
+            </div>
+            <h3>ADSS MULTI-LOOSE TUBE FIBRE OPTIC CABLE</h3>
+            <a
+              href="../assets/pdf/cabling/ADSS MULTI-LOOSE TUBE FIBRE OPTIC CABLE-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+
+          <div
+            class="product-item"
+            data-product-name="High Density Fibre Optic Patch Panel"
+          >
+            <div class="product-item-image">
+              <img
+                src="../assets/images/HighDensityFibreOptic.png"
+                alt="Forteq SC Adapter"
+              />
+            </div>
+            <h3>High Density Fibre Optic Patch Panel</h3>
+            <a
+              href="../assets/pdf/cabling/High Density Fibre Optic Patch Panel-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+
+          <div
+            class="product-item"
+            data-product-name="High Density 1U Loaded 48 Port Patch Panel"
+          >
+            <div class="product-item-image">
+              <img
+                src="../assets/images/HighDensity1U.png"
+                alt="Forteq Splice Tray"
+              />
+            </div>
+            <h3>High Density 1U Loaded 48 Port Patch Panel</h3>
+            <a
+              href="../assets/pdf/cabling/High Density 1U Loaded-datasheet.pdf"
+              download
+              class="btn btn-datasheet"
+              >Datasheet</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+      // Product Search Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("productSearchInput");
+        const productsList = document.getElementById("productsList");
+        const productItems = productsList.querySelectorAll(".product-item");
+
+        if (searchInput) {
+          searchInput.addEventListener("input", function (e) {
+            const searchQuery = e.target.value.toLowerCase().trim();
+
+            productItems.forEach((item) => {
+              const productName = (
+                item.dataset.productName || ""
+              ).toLowerCase();
+
+              if (productName.includes(searchQuery)) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        }
+      });
+    </script>
+    <script src="../assets/js/scroll-reveal.js"></script>
+  </body>
+</html>
