@@ -6,9 +6,10 @@ class StockInventory {
   constructor() {
     // ===== CONFIGURATION =====
     // Endpoint API Native PHP
-    this.apiEndpoint = "http://localhost/swardipa-be/api/get_products.php";
     // API Key sesuai yang kita buat di backend
-    this.apiKey = "Swarna_Secret_Key_2026_V1";
+    
+    this.apiEndpoint = `${ENV.BASE_URL}/get_products.php`;
+    this.apiKey = ENV.API_KEY;
     this.timeout = 10000;
 
     // ===== Data Storage =====

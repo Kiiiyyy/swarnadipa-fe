@@ -1,8 +1,7 @@
 class BrandLoader {
     constructor() {
-        this.apiEndpoint = "http://localhost/swardipa-be/api/get_brands.php";
-        this.apiKey = "Swarna_Secret_Key_2026_V1";
-        
+        this.apiEndpoint = `${ENV.BASE_URL}/get_brands.php`;
+        this.apiKey = ENV.API_KEY;
         // REVISI: Samakan dengan class di HTML lu (.brand-categories)
         this.container = document.querySelector(".brand-categories");
         

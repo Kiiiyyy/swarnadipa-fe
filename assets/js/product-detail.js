@@ -10,9 +10,8 @@ class ProductDetailLoader {
     this.productId = urlParams.get("id");
 
     // 2. Konfigurasi API (Pastikan ENV sudah di-load di HTML)
-    this.apiEndpoint = `http://localhost/swardipa-be/api/get_product_detail.php?id=${this.productId}`;
-    this.apiKey = "Swarna_Secret_Key_2026_V1";
-
+    this.apiEndpoint = `${ENV.BASE_URL}/get_product_detail.php?id=${this.productId}`;
+    this.apiKey = ENV.API_KEY;
     // 3. Bind DOM Elements Detail Produk
     this.nameElem = document.querySelector(".product-detail-info h2");
     this.skuElem = document.querySelector(".product-detail-code");

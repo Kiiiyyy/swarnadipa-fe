@@ -4,8 +4,8 @@ class ProductListLoader {
     this.brandId = urlParams.get("brand_id");
     this.catId = urlParams.get("cat_id");
 
-    this.apiEndpoint = `http://localhost/swardipa-be/api/get_product_list.php?brand_id=${this.brandId}&cat_id=${this.catId}`;
-    this.apiKey = "Swarna_Secret_Key_2026_V1";
+    this.apiEndpoint = `${ENV.BASE_URL}/get_product_list.php?brand_id=${this.brandId}&cat_id=${this.catId}`;
+    this.apiKey = ENV.API_KEY;
 
     this.container = document.getElementById("productsList");
     this.titleTag = document.querySelector("title");
