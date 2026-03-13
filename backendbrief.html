@@ -1,8 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Backend Project Brief</title>
+    <link rel="icon" type="image/png" href="assets/images/logox.png" />
 
     <style>
       body {
@@ -83,56 +84,56 @@
 
       <pre>
 laravel-backend/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── Api/
-│   │   │   │   ├── BrandController.php
-│   │   │   │   ├── CategoryController.php
-│   │   │   │   ├── ProductController.php
-│   │   │   │   ├── StockController.php
-│   │   │   │   └── AuthController.php
-│   │   │   └── Admin/
-│   │   │       ├── AdminAuthController.php
-│   │   │       ├── AdminProductController.php
-│   │   │       └── AdminStockController.php
-│   │   └── Middleware/
-│   │       ├── AdminMiddleware.php
-│   │       └── CorsMiddleware.php
-│   ├── Models/
-│   │   ├── User.php
-│   │   ├── Brand.php
-│   │   ├── Category.php
-│   │   ├── Product.php
-│   │   └── Inventory.php
-│   └── Resources/
-│       ├── BrandResource.php
-│       ├── ProductResource.php
-│       └── InventoryResource.php
-├── database/
-│   ├── migrations/
-│   │   ├── [timestamp]_create_users_table.php
-│   │   ├── [timestamp]_create_brands_table.php
-│   │   ├── [timestamp]_create_categories_table.php
-│   │   ├── [timestamp]_create_products_table.php
-│   │   └── [timestamp]_create_inventory_table.php
-│   └── seeders/
-│       ├── DatabaseSeeder.php
-│       ├── BrandSeeder.php
-│       ├── CategorySeeder.php
-│       └── ProductSeeder.php
-├── routes/
-│   ├── api.php
-│   ├── web.php
-│   └── channels.php
-├── resources/
-│   └── views/ (optional, untuk admin if web-based)
-├── storage/
-│   └── app/
-│       ├── uploads/images/
-│       └── uploads/documents/
-├── tests/ (optional)
-└── .env (environment variables)
++-- app/
+�   +-- Http/
+�   �   +-- Controllers/
+�   �   �   +-- Api/
+�   �   �   �   +-- BrandController.php
+�   �   �   �   +-- CategoryController.php
+�   �   �   �   +-- ProductController.php
+�   �   �   �   +-- StockController.php
+�   �   �   �   +-- AuthController.php
+�   �   �   +-- Admin/
+�   �   �       +-- AdminAuthController.php
+�   �   �       +-- AdminProductController.php
+�   �   �       +-- AdminStockController.php
+�   �   +-- Middleware/
+�   �       +-- AdminMiddleware.php
+�   �       +-- CorsMiddleware.php
+�   +-- Models/
+�   �   +-- User.php
+�   �   +-- Brand.php
+�   �   +-- Category.php
+�   �   +-- Product.php
+�   �   +-- Inventory.php
+�   +-- Resources/
+�       +-- BrandResource.php
+�       +-- ProductResource.php
+�       +-- InventoryResource.php
++-- database/
+�   +-- migrations/
+�   �   +-- [timestamp]_create_users_table.php
+�   �   +-- [timestamp]_create_brands_table.php
+�   �   +-- [timestamp]_create_categories_table.php
+�   �   +-- [timestamp]_create_products_table.php
+�   �   +-- [timestamp]_create_inventory_table.php
+�   +-- seeders/
+�       +-- DatabaseSeeder.php
+�       +-- BrandSeeder.php
+�       +-- CategorySeeder.php
+�       +-- ProductSeeder.php
++-- routes/
+�   +-- api.php
+�   +-- web.php
+�   +-- channels.php
++-- resources/
+�   +-- views/ (optional, untuk admin if web-based)
++-- storage/
+�   +-- app/
+�       +-- uploads/images/
+�       +-- uploads/documents/
++-- tests/ (optional)
++-- .env (environment variables)
 </pre
       >
     </div>
