@@ -3,21 +3,61 @@
 // 1. DYNAMIC NAVBAR INITIALIZATION
 // ==========================================
 
-window.initMobileMenu = function() {
+window.initMobileMenu = function () {
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
   const whereToBuyBtn = document.querySelector(".where-to-buy");
   const navbarWrapper = document.querySelector(".navbar-wrapper");
+  const mobileBreakpoint = 768;
+  const zoomHamburgerThreshold = 1.2;
+  const baseDevicePixelRatio = window.devicePixelRatio || 1;
+
+  function getZoomRatio() {
+    const currentDpr = window.devicePixelRatio || 1;
+    const dprRatio = currentDpr / baseDevicePixelRatio;
+    const viewportRatio =
+      window.outerWidth && window.innerWidth
+        ? window.outerWidth / window.innerWidth
+        : 1;
+    const visualViewportRatio =
+      window.visualViewport && window.visualViewport.scale
+        ? 1 / window.visualViewport.scale
+        : 1;
+
+    return Math.max(dprRatio, viewportRatio, visualViewportRatio);
+  }
+
+  function shouldUseHamburgerMode() {
+    return (
+      window.innerWidth <= mobileBreakpoint ||
+      getZoomRatio() >= zoomHamburgerThreshold
+    );
+  }
+
+  function syncHamburgerClass() {
+    document.body.classList.toggle("force-hamburger", shouldUseHamburgerMode());
+    if (document.body.classList.contains("company-page")) {
+      document.body.classList.toggle(
+        "force-company-mobile",
+        window.innerWidth > mobileBreakpoint &&
+          getZoomRatio() >= zoomHamburgerThreshold,
+      );
+    }
+  }
 
   if (menuToggle && navMenu) {
     // Fungsi pindahin tombol "Contact Us" ke dalem menu pas mobile
     function handleMobileMenu() {
-      if (window.innerWidth <= 768) {
+      syncHamburgerClass();
+
+      if (shouldUseHamburgerMode()) {
         if (whereToBuyBtn && !navMenu.contains(whereToBuyBtn)) {
           navMenu.appendChild(whereToBuyBtn);
           whereToBuyBtn.style.display = "block";
         }
       } else {
+        menuToggle.classList.remove("active");
+        navMenu.classList.remove("active");
         if (whereToBuyBtn && navMenu.contains(whereToBuyBtn) && navbarWrapper) {
           navbarWrapper.appendChild(whereToBuyBtn);
         }
@@ -27,6 +67,10 @@ window.initMobileMenu = function() {
     handleMobileMenu();
     window.removeEventListener("resize", handleMobileMenu); // Clean up old listener
     window.addEventListener("resize", handleMobileMenu);
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener("resize", handleMobileMenu);
+      window.visualViewport.addEventListener("resize", handleMobileMenu);
+    }
 
     // Toggle Hamburger
     menuToggle.addEventListener("click", () => {

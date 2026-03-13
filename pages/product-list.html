@@ -7,28 +7,50 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="../assets/css/reset.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/responsive.css" />
   </head>
   <body>
-
     <section class="product-list-section">
       <div class="container">
-        <div class="product-search-box">
-          <span class="product-search-icon" aria-hidden="true">🔍</span>
-          <input
-            type="text"
-            id="productSearchInput"
-            placeholder="Search products by name or SKU..."
-            class="product-search-input"
-          />
+        <div class="product-toolbar">
+          <div class="product-search-box">
+            <span class="product-search-icon" aria-hidden="true">
+              <svg
+                class="search-icon-svg"
+                viewBox="0 0 24 24"
+                focusable="false"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="M20 20L16.65 16.65"></path>
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="productSearchInput"
+              placeholder="Search products by name or SKU..."
+              class="product-search-input"
+            />
+          </div>
+          <select
+            id="productSortSelect"
+            class="sort-select"
+            aria-label="Sort products"
+          >
+            <option value="az">Sort: A-Z</option>
+            <option value="za">Sort: Z-A</option>
+          </select>
         </div>
 
         <div class="products-list" id="productsList">
-            <p>Loading products...</p>
+          <p>Loading products...</p>
         </div>
       </div>
     </section>

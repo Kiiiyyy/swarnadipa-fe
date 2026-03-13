@@ -66,14 +66,34 @@
     <section class="product-list-section">
       <div class="container">
         <!-- Product Search -->
-        <div class="product-search-box">
-          <span class="product-search-icon" aria-hidden="true">🔍</span>
-          <input
-            type="text"
-            id="productSearchInput"
-            placeholder="Search products by name..."
-            class="product-search-input"
-          />
+        <div class="product-toolbar">
+          <div class="product-search-box">
+            <span class="product-search-icon" aria-hidden="true">
+              <svg
+                class="search-icon-svg"
+                viewBox="0 0 24 24"
+                focusable="false"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="M20 20L16.65 16.65"></path>
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="productSearchInput"
+              placeholder="Search products by name..."
+              class="product-search-input"
+            />
+          </div>
+          <select
+            id="productSortSelect"
+            class="sort-select"
+            aria-label="Sort products"
+          >
+            <option value="az">Sort: A-Z</option>
+            <option value="za">Sort: Z-A</option>
+          </select>
         </div>
 
         <div class="products-list" id="productsList">
@@ -143,8 +163,25 @@
       // Product Search Functionality
       document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("productSearchInput");
+        const sortSelect = document.getElementById("productSortSelect");
         const productsList = document.getElementById("productsList");
-        const productItems = productsList.querySelectorAll(".product-item");
+        const productItems = Array.from(
+          productsList.querySelectorAll(".product-item"),
+        );
+
+        const sortItems = (order) => {
+          const sorted = [...productItems].sort((a, b) => {
+            const nameA = (a.dataset.productName || "").toLowerCase();
+            const nameB = (b.dataset.productName || "").toLowerCase();
+            return order === "za"
+              ? nameB.localeCompare(nameA)
+              : nameA.localeCompare(nameB);
+          });
+
+          sorted.forEach((item) => productsList.appendChild(item));
+        };
+
+        sortItems("az");
 
         if (searchInput) {
           searchInput.addEventListener("input", function (e) {
@@ -161,6 +198,12 @@
                 item.style.display = "none";
               }
             });
+          });
+        }
+
+        if (sortSelect) {
+          sortSelect.addEventListener("change", function (e) {
+            sortItems(e.target.value);
           });
         }
       });

@@ -6,16 +6,16 @@ class StockInventory {
   constructor() {
     // ===== CONFIGURATION =====
     // Endpoint API Native PHP
-    this.apiEndpoint = "http://localhost/swardipa-be/api/get_products.php"; 
+    this.apiEndpoint = "http://localhost/swardipa-be/api/get_products.php";
     // API Key sesuai yang kita buat di backend
-    this.apiKey = "Swarna_Secret_Key_2026_V1"; 
-    this.timeout = 10000; 
+    this.apiKey = "Swarna_Secret_Key_2026_V1";
+    this.timeout = 10000;
 
     // ===== Data Storage =====
-    this.allData = []; 
-    this.filteredData = []; 
-    this.currentBrand = "all"; 
-    this.searchQuery = ""; 
+    this.allData = [];
+    this.filteredData = [];
+    this.currentBrand = "all";
+    this.searchQuery = "";
 
     // ===== DOM Elements =====
     this.loadingState = document.getElementById("loadingState");
@@ -27,7 +27,9 @@ class StockInventory {
     this.retryButton = document.getElementById("retryButton");
     this.filterSection = document.getElementById("filterSection");
     this.searchInput = document.getElementById("searchInput");
+    this.sortSelect = document.getElementById("stockSortSelect");
     this.filterButtons = document.querySelectorAll(".filter-btn");
+    this.sortOrder = "az";
 
     // ===== Event Listeners =====
     if (this.retryButton) {
@@ -50,6 +52,13 @@ class StockInventory {
       });
     });
 
+    if (this.sortSelect) {
+      this.sortSelect.addEventListener("change", (e) => {
+        this.sortOrder = e.target.value;
+        this.applyFilters();
+      });
+    }
+
     // ===== Initialize =====
     this.loadStockData();
   }
@@ -66,14 +75,16 @@ class StockInventory {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
-          "X-API-KEY": this.apiKey // Kirim Kunci Keamanan
+          Accept: "application/json",
+          "X-API-KEY": this.apiKey, // Kirim Kunci Keamanan
         },
       });
 
       if (!response.ok) {
-        if (response.status === 401) throw new Error("API Key Invalid atau Tidak Terkirim.");
-        if (response.status === 429) throw new Error("Terlalu banyak permintaan (Rate Limit).");
+        if (response.status === 401)
+          throw new Error("API Key Invalid atau Tidak Terkirim.");
+        if (response.status === 429)
+          throw new Error("Terlalu banyak permintaan (Rate Limit).");
         throw new Error(`HTTP Error: ${response.status}`);
       }
 
@@ -94,9 +105,8 @@ class StockInventory {
       this.filteredData = [...this.allData];
       if (this.filterSection) this.filterSection.style.display = "block";
 
-      this.renderTable(this.filteredData);
+      this.applyFilters();
       this.showTable();
-
     } catch (error) {
       console.error("Fetch Error:", error);
       this.showError(error.message);
@@ -106,7 +116,9 @@ class StockInventory {
   fetchWithTimeout(url, options = {}) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
-    return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timeoutId));
+    return fetch(url, { ...options, signal: controller.signal }).finally(() =>
+      clearTimeout(timeoutId),
+    );
   }
 
   renderTable(data) {
@@ -119,7 +131,7 @@ class StockInventory {
 
     data.forEach((row, index) => {
       const tr = document.createElement("tr");
-      
+
       // Menggunakan mapping key yang sudah kita buat di PHP tadi
       tr.innerHTML = `
         <td>${index + 1}</td>
@@ -146,17 +158,29 @@ class StockInventory {
     let filtered = [...this.allData];
 
     if (this.currentBrand !== "all") {
-      filtered = filtered.filter(item => 
-        item.brand && item.brand.toLowerCase() === this.currentBrand.toLowerCase()
+      filtered = filtered.filter(
+        (item) =>
+          item.brand &&
+          item.brand.toLowerCase() === this.currentBrand.toLowerCase(),
       );
     }
 
     if (this.searchQuery) {
-      filtered = filtered.filter(item => 
-        (item.product_name || "").toLowerCase().includes(this.searchQuery) ||
-        (item.sku || "").toLowerCase().includes(this.searchQuery)
+      filtered = filtered.filter(
+        (item) =>
+          (item.product_name || "").toLowerCase().includes(this.searchQuery) ||
+          (item.sku || "").toLowerCase().includes(this.searchQuery),
       );
     }
+
+    filtered.sort((a, b) => {
+      const nameA = (a.product_name || "").toLowerCase();
+      const nameB = (b.product_name || "").toLowerCase();
+      if (this.sortOrder === "za") {
+        return nameB.localeCompare(nameA);
+      }
+      return nameA.localeCompare(nameB);
+    });
 
     this.filteredData = filtered;
     this.renderTable(this.filteredData);
@@ -166,7 +190,7 @@ class StockInventory {
     const statusMap = {
       in_stock: { class: "in", text: "In Stock" },
       low_stock: { class: "low", text: "Low Stock" },
-      out_of_stock: { class: "out", text: "Sold Out" }
+      out_of_stock: { class: "out", text: "Sold" },
     };
 
     const info = statusMap[status] || { class: "out", text: "N/A" };
@@ -176,7 +200,11 @@ class StockInventory {
   formatDate(dateString) {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
-    return date.toLocaleDateString("id-ID", { year: "numeric", month: "short", day: "numeric" });
+    return date.toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   }
 
   escapeHtml(text) {
@@ -186,13 +214,33 @@ class StockInventory {
     return div.innerHTML;
   }
 
-  showLoading() { this.loadingState.style.display = "flex"; this.tableContainer.style.display = "none"; this.emptyState.style.display = "none"; this.errorState.style.display = "none"; }
-  showTable() { this.loadingState.style.display = "none"; this.tableContainer.style.display = "block"; this.emptyState.style.display = "none"; this.errorState.style.display = "none"; }
-  showEmpty() { this.loadingState.style.display = "none"; this.tableContainer.style.display = "none"; this.emptyState.style.display = "flex"; this.errorState.style.display = "none"; }
-  showError(msg) { 
-    this.loadingState.style.display = "none"; this.tableContainer.style.display = "none"; this.errorState.style.display = "flex";
-    if (this.errorMessage) this.errorMessage.textContent = msg || "An error occurred.";
+  showLoading() {
+    this.loadingState.style.display = "flex";
+    this.tableContainer.style.display = "none";
+    this.emptyState.style.display = "none";
+    this.errorState.style.display = "none";
+  }
+  showTable() {
+    this.loadingState.style.display = "none";
+    this.tableContainer.style.display = "block";
+    this.emptyState.style.display = "none";
+    this.errorState.style.display = "none";
+  }
+  showEmpty() {
+    this.loadingState.style.display = "none";
+    this.tableContainer.style.display = "none";
+    this.emptyState.style.display = "flex";
+    this.errorState.style.display = "none";
+  }
+  showError(msg) {
+    this.loadingState.style.display = "none";
+    this.tableContainer.style.display = "none";
+    this.errorState.style.display = "flex";
+    if (this.errorMessage)
+      this.errorMessage.textContent = msg || "An error occurred.";
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => { new StockInventory(); });
+document.addEventListener("DOMContentLoaded", () => {
+  new StockInventory();
+});
