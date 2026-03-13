@@ -5,18 +5,9 @@
   body {
     padding-top: 52px;
   }
-
-  .pdf-preview-container {
-    border-radius: 8px;
-  }
-
-  #pdfIframe {
-    /* Di HP kita buat sedikit lebih pendek biar gak perlu scroll kejauhan */
-    height: 400px;
-    aspect-ratio: auto;
-    background-color: #fff;
-  }
-
+    .pdf-preview-container {
+        border-radius: 8px;
+    }
   .navbar-wrapper {
     padding: 2px 6px;
     position: relative;
@@ -603,7 +594,7 @@
 
   /* Products List */
   .products-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-top: 30px;
   }

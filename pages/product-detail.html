@@ -35,23 +35,27 @@
       </div>
     </section>
 
-<section class="product-datasheet-section" style="display: none;">
-  <div class="container text-center">
-     <h4 style="margin-bottom: 20px; font-weight: 700; color: #333;">Product Documentation</h4>
-     
-     <div class="pdf-preview-container">
-         <iframe src="" id="pdfIframe" width="100%" height="550px" style="border: none; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></iframe>
-     </div>
-     
-     <p style="margin-top: 15px; color: #666;">
-        Trouble viewing? <a href="#" id="manualDownload" download class="text-primary" style="font-weight: 600;">Click here to download instead.</a>
-     </p>
-  </div>
-</section>
+    <section class="product-datasheet-section" style="display: none;">
+      <div class="container text-center">
+        <h4 style="margin-bottom: 20px; font-weight: 700; color: #333;">Product Documentation</h4>
+        
+        <div class="pdf-preview-container" style="background: #f1f1f1; border-radius: 12px; overflow: hidden; position: relative; min-height: 300px;">
+            <div id="pdf-loader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <p>Rendering PDF...</p>
+            </div>
+            <canvas id="pdf-render" style="width: 100%; height: auto; display: block;"></canvas>
+        </div>
+        
+        <p style="margin-top: 15px; color: #666;">
+            Trouble viewing? <a href="#" id="manualDownload" download class="text-primary" style="font-weight: 600;">Click here to download instead.</a>
+        </p>
+      </div>
+    </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="../assets/js/navbar-loader.js"></script>
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/scroll-reveal.js"></script>
     <script src="../assets/js/product-detail.js"></script>
+
   </body>
 </html>

@@ -2933,19 +2933,13 @@ body.page-leaving {
 }
 
 .pdf-preview-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  background: #333; /* Warna gelap biar nyambung sama viewer PDF */
-  border-radius: 12px;
-  overflow: hidden;
-  line-height: 0; /* Hapus gap di bawah iframe */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
 }
 
-#pdfIframe {
-  width: 100%;
-  /* Gunakan aspect ratio kertas A4 biar proporsional */
-  aspect-ratio: 1 / 1.4;
-  border: none;
+#pdf-render {
+    /* Biar responsif di semua device */
+    max-width: 100%;
+    height: auto !important;
 }
