@@ -38,16 +38,21 @@
     <section class="product-datasheet-section" style="display: none;">
       <div class="container text-center">
         <h4 style="margin-bottom: 20px; font-weight: 700; color: #333;">Product Documentation</h4>
-        
-        <div class="pdf-preview-container" style="background: #f1f1f1; border-radius: 12px; overflow: hidden; position: relative; min-height: 300px;">
-            <div id="pdf-loader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                <p>Rendering PDF...</p>
-            </div>
-            <canvas id="pdf-render" style="width: 100%; height: auto; display: block;"></canvas>
+
+        <div class="pdf-nav-bar" style="background: #333; color: white; padding: 10px; border-radius: 8px 8px 0 0; display: flex; justify-content: center; align-items: center; gap: 20px;">
+          <button id="prev-page" class="btn-nav" style="background: #e31e24; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer;">Prev</button>
+          
+          <span style="font-size: 14px;">Page: <span id="page-num">1</span> / <span id="page-count">0</span></span>
+          
+          <button id="next-page" class="btn-nav" style="background: #e31e24; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer;">Next</button>
         </div>
-        
+
+        <div class="pdf-preview-container" style="background: #525659; padding: 10px; border-radius: 0 0 8px 8px; border: 1px solid #333;">
+          <canvas id="pdf-render" style="width: 100%; height: auto; display: block; margin: 0 auto;"></canvas>
+        </div>
+
         <p style="margin-top: 15px; color: #666;">
-            Trouble viewing? <a href="#" id="manualDownload" download class="text-primary" style="font-weight: 600;">Click here to download instead.</a>
+          Trouble viewing? <a href="#" id="manualDownload" download class="text-primary" style="font-weight: 600;">Click here to download instead.</a>
         </p>
       </div>
     </section>
